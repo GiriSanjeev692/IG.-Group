@@ -2,20 +2,21 @@
 //  DetailsViewModel.swift
 //  DetailsViewModel
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import Foundation
 
 enum ProfileCellType {
+    case newsImage
     case profileImage
     case trackName
     case description
     case collection
 }
 class DetailsViewModel: NSObject {
-    var artist: Artist?
-    var rows: [ProfileCellType] = [.profileImage, .trackName, .collection, .description]
+    var newReport: SpecialReport?
+    var rows: [ProfileCellType] = [.newsImage, .description]
     
     
     func getSections() -> Int {

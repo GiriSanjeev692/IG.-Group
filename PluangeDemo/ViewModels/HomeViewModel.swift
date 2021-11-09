@@ -2,23 +2,23 @@
 //  HomeViewModel.swift
 //  HomeViewModel
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import Foundation
 
 class HomeViewModel : NSObject {
     var networkManager = NetworkManager()
-    var repoList: [Artist] = []
+    var topNews: [SpecialReport] = []
     var selectedObject: Artist? = nil
+    var selectedIndexPath: IndexPath?
     
-    func fetchRepoList(completionHandler: @escaping((Result<ResultData, Error>) -> Swift.Void)) {
-        let urlStr = "https://itunes.apple.com/search?term=adele"
-        networkManager.makeServerRequest(responseType: ResultData.self, urlStr: urlStr) {[weak self] result in
+    func fetchRepoList(completionHandler: @escaping((Result<News, ErrorDetails>) -> Swift.Void)) {
+        networkManager.makeServerRequest(responseType: News.self, urlStr: APIEndpoints.dashboard) {[weak self] result in
             switch result {
             case .success(let data):
                 print("bxbbn")
-                self?.repoList = data.results ?? []
+                self?.topNews = data.specialReport ?? []
             case .failure(let error):
                 print("Error")
             }
@@ -31,7 +31,7 @@ class HomeViewModel : NSObject {
     }
     
     func numberOfRowsForSection(section: Int) -> Int {
-        return repoList.count
+        return topNews.count
     }
     
    

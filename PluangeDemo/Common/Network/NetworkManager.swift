@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  NetworkManager
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import Foundation
@@ -15,7 +15,7 @@ public enum HTTPRequestType: String {
 class NetworkManager: NSObject {
     
     let session = URLSession.shared
-    func makeServerRequest<ResponseType: Codable>(responseType: ResponseType.Type, urlStr: String, requestType: HTTPRequestType = .get, completionHandler: @escaping((Result<ResponseType, Error>) -> Swift.Void)) {
+    func makeServerRequest<ResponseType: Codable>(responseType: ResponseType.Type, urlStr: String, requestType: HTTPRequestType = .get, completionHandler: @escaping((Result<ResponseType, ErrorDetails>) -> Swift.Void)) {
         guard let url = URL.init(string: urlStr) else {
             return
         }
@@ -23,8 +23,14 @@ class NetworkManager: NSObject {
         urlRequest.httpMethod = requestType.rawValue
         let task = session.dataTask(with: urlRequest) { responseData, response, error in
             guard let listData = responseData, let data = String(decoding: listData, as: UTF8.self).data(using: .utf8), error == nil else {
-                DispatchQueue.main.async {
-                    completionHandler(.failure(error!))
+                if let error = error as NSError? {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(ErrorDetails(errorType: ErrorTypes.getErrorType(error: error), message: ErrorTypes.getErrorType(error: error).rawValue)))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(ErrorDetails(message: ErrorTypes.invalidData.rawValue)))
+                    }
                 }
                 return
                 
@@ -38,7 +44,7 @@ class NetworkManager: NSObject {
             } catch let error as NSError {
                 print("Error in parsing: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    completionHandler(.failure(error))
+                    completionHandler(.failure(ErrorDetails(errorType: ErrorTypes.getErrorType(error: error), message: ErrorTypes.getErrorType(error: error).rawValue)))
                 }
             }
         }

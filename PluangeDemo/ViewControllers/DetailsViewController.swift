@@ -2,7 +2,7 @@
 //  DetailsViewController.swift
 //  DetailsViewController
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import UIKit
@@ -32,22 +32,28 @@ class DetailsViewController: BaseViewController {
         listTableView.dataSource = self
         listTableView.register(cellType: DetailsTableViewCell.self)
         listTableView.register(cellType: ProfileTableViewCell.self)
+        listTableView.register(cellType: DetailImageTableViewCell.self)
     }
     
     // MARK: - TableView helping methods
-    private func getTrackTableViewCell(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(cellType: DetailsTableViewCell.self)
-        cell.configureCell(title: "Track", desc: detailsViewModel.artist?.trackName)
+    private func getNewsTableViewCell(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(cellType: DetailImageTableViewCell.self)
+        cell.configureCell(item: detailsViewModel.newReport)
         return cell
     }
-    private func getDescTableViewCell(indexPath: IndexPath, tableView: UITableView, title: String, desc: String?) -> UITableViewCell {
+    private func getTrackTableViewCell(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(cellType: DetailsTableViewCell.self)
+//        cell.configureCell(title: "Track", desc: detailsViewModel.artist?.trackName)
+        return cell
+    }
+    private func getDescTableViewCell(indexPath: IndexPath, tableView: UITableView, title: String?, desc: String?) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellType: DetailsTableViewCell.self)
         cell.configureCell(title: title, desc: desc)
         return cell
     }
     private func getProfileTableViewCell(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellType: ProfileTableViewCell.self)
-        cell.configureCell(item: detailsViewModel.artist)
+//        cell.configureCell(item: detailsViewModel.artist)
         return cell
     }
 
@@ -65,14 +71,12 @@ extension DetailsViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowType = detailsViewModel.rows[indexPath.row]
         switch rowType {
-        case .profileImage:
-            return getProfileTableViewCell(indexPath: indexPath, tableView: tableView)
-        case .trackName:
-            return getTrackTableViewCell(indexPath: indexPath, tableView: tableView)
+        case .newsImage:
+            return getNewsTableViewCell(indexPath: indexPath, tableView: tableView)
         case .description:
-            return getDescTableViewCell(indexPath: indexPath, tableView: tableView, title: "Description", desc: detailsViewModel.artist?.description ?? "-")
-        case .collection:
-            return getDescTableViewCell(indexPath: indexPath, tableView: tableView, title: "Collection name", desc: detailsViewModel.artist?.collectionName ?? "-")
+            return getDescTableViewCell(indexPath: indexPath, tableView: tableView, title: detailsViewModel.newReport?.title, desc: detailsViewModel.newReport?.specialReportDescription)
+        default:
+            return UITableViewCell()
         }
         
     }

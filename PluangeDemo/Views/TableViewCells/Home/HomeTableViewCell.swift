@@ -2,7 +2,7 @@
 //  HomeTableViewCell.swift
 //  HomeTableViewCell
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import UIKit
@@ -29,9 +29,9 @@ class HomeTableViewCell: UITableViewCell, NibReusable {
         topImageView.makeCirculer()
     }
     
-    func configureCell(item: Artist) {
-        topImageView.loadImage(urlStr: item.artworkUrl60 ?? "")
-        titleLable.text = item.artistName
-        descLabel.text = item.description
+    func configureCell(item: SpecialReport) {
+        topImageView.loadImage(urlStr: item.headlineImageURL ?? "")
+        titleLable.text = item.title
+        descLabel.text = item.specialReportDescription
     }
 }

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  PluangeDemo
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import UIKit
@@ -30,8 +30,9 @@ class ViewController: BaseViewController {
         listTableView.register(cellType: HomeTableViewCell.self)
     }
     private func pushDetailVC() {
+        guard let indexPath = homeViewModel.selectedIndexPath else {return}
         let detailVC = DetailsViewController.instantiate(fromAppStoryboard: .main)
-        detailVC.detailsViewModel.artist = homeViewModel.selectedObject
+        detailVC.detailsViewModel.newReport = homeViewModel.topNews[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -41,8 +42,10 @@ class ViewController: BaseViewController {
             switch result {
             case .success(_):
                 self?.listTableView.reloadData()
-            case .failure(_):
+            case .failure(let errorDetails):
                 print("Api call failled")
+                Utility.showAlert(title: errorDetails.errorType?.rawValue, message: errorDetails.message, callback: nil)
+                
             }
         }
     }
@@ -50,7 +53,7 @@ class ViewController: BaseViewController {
     // MARK: - TableView helping methods
     private func getHomeTableViewCell(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = listTableView.dequeueReusableCell(cellType: HomeTableViewCell.self)
-        cell.configureCell(item: homeViewModel.repoList[indexPath.row])
+        cell.configureCell(item: homeViewModel.topNews[indexPath.row])
         return cell
     }
 }
@@ -74,7 +77,8 @@ extension ViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        homeViewModel.selectedObject = homeViewModel.repoList[indexPath.row]
+        homeViewModel.selectedIndexPath = indexPath
+//        homeViewModel.selectedObject = homeViewModel.topNews[indexPath.row]
         pushDetailVC()
     }
 }

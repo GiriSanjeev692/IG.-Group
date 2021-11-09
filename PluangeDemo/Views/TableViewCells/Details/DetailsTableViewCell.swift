@@ -2,7 +2,7 @@
 //  DetailsTableViewCell.swift
 //  DetailsTableViewCell
 //
-//  Created by Sanjeev Kumar on 31/10/21.
+//  Created by Sanjeev Kumar on 31/11/09.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ class DetailsTableViewCell: UITableViewCell, NibReusable {
         // Configure the view for the selected state
     }
     
-    func configureCell(title: String, desc: String?) {
+    func configureCell(title: String?, desc: String?) {
         titleLabel.text = title
         descLabel.text = desc ?? "-"
     }

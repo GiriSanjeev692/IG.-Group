@@ -20,17 +20,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zX3-cA-K0d">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="I4K-ti-eb9">
-                                <rect key="frame" x="16" y="0.0" width="288" height="106"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="I4K-ti-eb9">
+                                <rect key="frame" x="16" y="30" width="288" height="76"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmJ-Dg-w9Y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmJ-Dg-w9Y">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label dshfd fsddfdsa fsgfgs fsagfaj fsahfdasjh fasfgasj fsdfgasj fsdaghfgaj fsdfagsjf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFM-Lh-J8h">
-                                        <rect key="frame" x="0.0" y="23.5" width="288" height="82.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label dshfd fsddfdsa fsgfgs fsagfaj fsahfdasjh fasfgasj fsdfgasj fsdaghfgaj fsdfagsjf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFM-Lh-J8h">
+                                        <rect key="frame" x="0.0" y="25.5" width="288" height="50.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="I4K-ti-eb9" firstAttribute="leading" secondItem="zX3-cA-K0d" secondAttribute="leading" constant="16" id="8Ew-aH-3az"/>
-                            <constraint firstItem="I4K-ti-eb9" firstAttribute="top" secondItem="zX3-cA-K0d" secondAttribute="top" id="TW1-A9-zO3"/>
+                            <constraint firstItem="I4K-ti-eb9" firstAttribute="top" secondItem="zX3-cA-K0d" secondAttribute="top" constant="30" id="TW1-A9-zO3"/>
                             <constraint firstAttribute="bottom" secondItem="I4K-ti-eb9" secondAttribute="bottom" constant="20" id="iFy-8E-kPB"/>
                             <constraint firstAttribute="trailing" secondItem="I4K-ti-eb9" secondAttribute="trailing" constant="16" id="kvc-aB-N95"/>
                         </constraints>
